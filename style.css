@@ -8,6 +8,7 @@
 body {
     display: grid;
     place-items: center;
+    height: 100vh;
 }
 
 .action {
@@ -79,3 +80,48 @@ body {
     cursor: pointer;
 } */
 
+/* CREATE A NEW CARD */
+
+
+#create-card-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+#create-card-form {
+    width: 300px;
+    height: 300px;
+    background-color: blue;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#create-card-form h2 {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+#btn-close-form {
+    color: white;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.hidden {
+    visibility: hidden;
+}

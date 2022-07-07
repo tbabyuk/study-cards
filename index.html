@@ -12,15 +12,37 @@
 </head>
 
 <body>
-
-    <div class="card">
-        <div class="card-inner">
-            <div class="card-front">Front of Card</div>
-            <div class="card-back">Back of Card</div>
+    <div id="cards-wrapper">
+        <button id="btn-open-form">New Card</button>
+        <div class="card">
+            <div class="card-inner">
+                <div class="card-front">Front of Card</div>
+                <div class="card-back">Back of Card</div>
+            </div>
+            <span class="flipper">FLIP</span>
         </div>
-        <span class="flipper">FLIP</span>
+        <button id="btn-prev">Previous</button>
+        <div id="current-card">1</div>
+        <button id="btn-next">Next</button>
+
     </div>
-    <button class="action">Action</button>
+
+
+    <div id="create-card-overlay" class="hidden">
+        <form id="create-card-form">
+            <h2>Create a new card:</h2>
+            <div class="input-group">
+                <label for="question">Question:</label>
+                <input type="text" id="question">
+            </div>
+            <div class="input-group">
+                <label for="answer">Answer:</label>
+                <input type="text" id="answer">
+            </div>
+            <button id="btn-create-card">Create Card</button>
+            <span id="btn-close-form">&times;</span>
+        </form>
+    </div>
 
 
 
@@ -44,4 +66,5 @@
         </div>
     </div> -->
 </body>
+
 </html>
