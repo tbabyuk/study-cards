@@ -5,66 +5,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/386f0d29b2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
-    <title>Practice Cards</title>
+    <title>Study Cards</title>
 </head>
 
 <body>
-    <div id="cards-wrapper">
-        <button id="btn-open-form">New Card</button>
-        <div class="card">
+        <h2>Study Cards</h2>
+        <button id="btn-add-card">Add Card</button>
+        <div id="cards-wrapper">
+            <!-- <div class="card">
             <div class="card-inner">
-                <div class="card-front">Front of Card</div>
-                <div class="card-back">Back of Card</div>
+                <div class="card-front">Front of Card 1</div>
+                <div class="card-back">Back of Card 1</div>
             </div>
-            <span class="flipper">FLIP</span>
+            <span class="btn-flip">FLIP</span>
         </div>
-        <button id="btn-prev">Previous</button>
-        <div id="current-card">1</div>
-        <button id="btn-next">Next</button>
-
-    </div>
-
-
-    <div id="create-card-overlay" class="hidden">
-        <form id="create-card-form">
-            <h2>Create a new card:</h2>
-            <div class="input-group">
-                <label for="question">Question:</label>
-                <input type="text" id="question">
+        <div class="card active">
+            <div class="card-inner">
+                <div class="card-front">Front of Card 2</div>
+                <div class="card-back">Back of Card 2</div>
             </div>
-            <div class="input-group">
-                <label for="answer">Answer:</label>
-                <input type="text" id="answer">
-            </div>
-            <button id="btn-create-card">Create Card</button>
+            <span class="btn-flip">FLIP</span>
+        </div> -->
+        </div>
+        <span id="current-card">1</span>
+        <button id="btn-next-card">Next</button>
+        <button id="btn-prev-card">Prev</button>
+
+        <div class="add-card-modal hidden">
+            <form id="add-card-form">
+                <h3>Add a new card</h3>
+                <div class="form-group">
+                    <label for="question">Question:</label>
+                    <input type="text" id="question">
+                </div>
+                <div class="form-group">
+                    <label for="answer">Answer:</label>
+                    <input type="text" id="answer">
+                </div>
+                <button id="btn-form-submit">Submit</button>
+            </form>
             <span id="btn-close-form">&times;</span>
-        </form>
-    </div>
-
-
-
-
-
-    <!-- <button id="btn-save">Save Data</button>
-    <button id="show-animals">Show Animals</button>
-    <div class="content"></div> -->
-
-    <!-- <div class="buttons">
-        <button class="buttons" id="btn-card-1">Show card 1</button>
-        <button class="buttons" id="btn-card-2">Show card 2</button>
-    </div>
-
-    <div class="cards">
-        <div id="card1" class="card">
-            I am card 1
         </div>
-        <div id="card2" class="card">
-            I am card 2
-        </div>
-    </div> -->
 </body>
 
 </html>
