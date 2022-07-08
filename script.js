@@ -10,6 +10,7 @@ const formAnswer = document.getElementById("answer");
 const currentCard = document.getElementById("current-card");
 const btnNextCard = document.getElementById("btn-next-card");
 const btnPrevCard = document.getElementById("btn-prev-card");
+const btnClear = document.getElementById("btn-clear");
 
 
 //Current active card
@@ -21,20 +22,22 @@ const cardsEl = [];
 
 
 //Card data
-const cardsData = [
-    {
-        question: "Card 1 question?",
-        answer: "Card 1 answer"
-    },
-    {
-        question: "Card 2 question?",
-        answer: "Card 2 answer"
-    },
-    {
-        question: "Card 3 question?",
-        answer: "Card 3 answer"
-    }
-];
+const cardsData = getCardsData();
+
+// const cardsData = [
+//     {
+//         question: "Card 1 question?",
+//         answer: "Card 1 answer"
+//     },
+//     {
+//         question: "Card 2 question?",
+//         answer: "Card 2 answer"
+//     },
+//     {
+//         question: "Card 3 question?",
+//         answer: "Card 3 answer"
+//     }
+// ];
 
 
 //Create cards based on card data
@@ -69,11 +72,24 @@ function createCard(data, index) {
     cardsWrapper.appendChild(card);
 }
 
+//Get cards from local storage
+function getCardsData() {
+    const cards = JSON.parse(localStorage.getItem('cards'));
+    return cards === null ? [] : cards;
+}
+
+//Add card to local stroage
+function setCardsData(cards) {
+    localStorage.setItem('cards', JSON.stringify(cards));
+    window.location.reload();
+}
+
 createCards();
 
 
 //EVENT LISTENERS
 
+//Next Button
 btnNextCard.addEventListener("click", () => {
     // cardsEl[currentActiveCard].className = 
     console.log(currentActiveCard)
@@ -91,6 +107,7 @@ btnNextCard.addEventListener("click", () => {
     updateCurrentCards();
 });
 
+//Previous Button
 btnPrevCard.addEventListener("click", () => {
     // cardsEl[currentActiveCard].className = 
     console.log(currentActiveCard)
@@ -107,11 +124,11 @@ btnPrevCard.addEventListener("click", () => {
     updateCurrentCards();
 });
 
-
-
+//Show add container
 btnAddCard.addEventListener("click", () => {
     addCardModal.classList.remove("hidden");
-    cardsWrapper.style.display = "none"
+    cardsWrapper.style.display = "none";
+    formQuestion.focus();
 })
 
 addCardModal.addEventListener("click", (e) => {
@@ -128,6 +145,34 @@ btnCloseForm.addEventListener("click", () => {
 
 })
 
+btnFormSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
+    const question = formQuestion.value;
+    const answer = formAnswer.value;
+    console.log(question, answer)
+
+    if(question.trim() && answer.trim()) {
+        const newCard = {question, answer};
+
+        createCard(newCard);
+
+        formQuestion.value = '';
+        formAnswer.value = '';
+    
+        addCardModal.classList.add("hidden");
+    
+        cardsData.push(newCard);
+        setCardsData(cardsData);
+    }
+
+
+
+    // cardsData.push(newCard);
+    // console.log(cardsData);
+    // addCardModal.classList.add("hidden");
+    // updateCurrentCards();
+})
+
 
 updateCurrentCards();
 
@@ -136,18 +181,12 @@ function updateCurrentCards() {
 }
 
 
-btnFormSubmit.addEventListener("click", (e) => {
-    e.preventDefault();
-    const newCard = {
-        question: `${formQuestion.value}`,
-        answer: `${formAnswer.value}`
-    }
-
-    cardsData.push(newCard);
-    console.log(cardsData);
-    addCardModal.classList.add("hidden");
-    updateCurrentCards();
+btnClear.addEventListener("click", () => {
+    localStorage.clear();
+    cardsWrapper.innerHTMl = '';
+    window.location.reload();
 })
+
 
 
 
