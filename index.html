@@ -5,17 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/386f0d29b2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
     <title>Study Cards</title>
 </head>
 
 <body>
+    <div id="header">
         <h2>Study Cards</h2>
-        <button id="btn-add-card">Add Card</button>
-        <div id="cards-wrapper">
-            <!-- <div class="card">
+        <button class="btn" id="btn-clear">&#128465; Clear All</button>
+        <button class="btn" id="btn-add-card">&plus; Add Card</button>
+    </div>
+    <div id="cards-wrapper">
+        <span id="no-cards-message">No cards yet.<br>Add a new card!</span>
+        <!-- <div class="card">
             <div class="card-inner">
                 <div class="card-front">Front of Card 1</div>
                 <div class="card-back">Back of Card 1</div>
@@ -29,28 +32,29 @@
             </div>
             <span class="btn-flip">FLIP</span>
         </div> -->
-        </div>
-        <span id="current-card">1</span>
-        <button id="btn-next-card">Next</button>
-        <button id="btn-prev-card">Prev</button>
-        <button id="btn-clear">Clear</button>
+    </div>
+    <div id="footer">
+        <span id="current-card"></span>
+        <button class="btn" id="btn-next-card">next &rarr;</button>
+        <button class="btn" id="btn-prev-card">&larr; prev</button>
+    </div>
 
 
-        <div class="add-card-modal hidden">
-            <form id="add-card-form">
-                <h3>Add a new card</h3>
-                <div class="form-group">
-                    <label for="question">Question:</label>
-                    <input type="text" id="question">
-                </div>
-                <div class="form-group">
-                    <label for="answer">Answer:</label>
-                    <input type="text" id="answer">
-                </div>
-                <button id="btn-form-submit">Submit</button>
-            </form>
-            <span id="btn-close-form">&times;</span>
-        </div>
+    <div class="add-card-modal hidden">
+        <form id="add-card-form">
+            <h3>ADD A NEW CARD</h3>
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <input type="text" id="question">
+            </div>
+            <div class="form-group">
+                <label for="answer">Answer:</label>
+                <input type="text" id="answer">
+            </div>
+            <button class="btn" id="btn-submit-form">Submit</button>
+        </form>
+        <span id="btn-close-form">&times;</span>
+    </div>
 </body>
 
 </html>

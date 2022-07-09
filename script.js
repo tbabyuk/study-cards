@@ -1,49 +1,49 @@
+//DOM ELEMENTS
 
-const addCardModal = document.querySelector(".add-card-modal");
+//Buttons
+const btnClear = document.getElementById("btn-clear");
+const btnAddCard = document.getElementById("btn-add-card");
+const btnNextCard = document.getElementById("btn-next-card");
+const btnPrevCard = document.getElementById("btn-prev-card");
+const btnSubmitForm = document.getElementById("btn-submit-form");
+const btnCloseForm = document.getElementById("btn-close-form");
+
+//Other
 const cardsWrapper = document.getElementById("cards-wrapper");
 const cards = document.querySelectorAll(".card");
-const btnAddCard = document.getElementById("btn-add-card");
-const btnCloseForm = document.getElementById("btn-close-form");
-const btnFormSubmit = document.getElementById("btn-form-submit");
+const addCardModal = document.querySelector(".add-card-modal");
+const noCardsMsg = document.getElementById("no-cards-message");
 const formQuestion = document.getElementById("question");
 const formAnswer = document.getElementById("answer");
 const currentCard = document.getElementById("current-card");
-const btnNextCard = document.getElementById("btn-next-card");
-const btnPrevCard = document.getElementById("btn-prev-card");
-const btnClear = document.getElementById("btn-clear");
+
 
 
 //Current active card
 let currentActiveCard = 0;
 
-
 //Store DOM cards
 const cardsEl = [];
 
-
-//Card data
+//Pull cards data from local storage, if any exists
 const cardsData = getCardsData();
 
-// const cardsData = [
-//     {
-//         question: "Card 1 question?",
-//         answer: "Card 1 answer"
-//     },
-//     {
-//         question: "Card 2 question?",
-//         answer: "Card 2 answer"
-//     },
-//     {
-//         question: "Card 3 question?",
-//         answer: "Card 3 answer"
-//     }
-// ];
+// ============================================ //
 
+//FUNCTIONS
 
-//Create cards based on card data
+(function checkCards() {
+    if(!JSON.parse(localStorage.getItem("cards"))) {
+        currentCard.innerText = "0";
+    }
+})()
+
+//Create cards based on cards data
 function createCards() {
     cardsData.forEach((data, index) => createCard(data, index));
 };
+
+createCards();
 
 //Create a single card
 function createCard(data, index) {
@@ -60,7 +60,7 @@ function createCard(data, index) {
     <div class="card-front">${data.question}</div>
     <div class="card-back">${data.answer}</div>
     </div>
-    <span class="btn-flip">FLIP</span>
+    <span class="btn-flip">&orarr; FLIP</span>
     `;
 
     card.addEventListener("click", () => {
@@ -74,26 +74,38 @@ function createCard(data, index) {
 
 //Get cards from local storage
 function getCardsData() {
-    const cards = JSON.parse(localStorage.getItem('cards'));
-    return cards === null ? [] : cards;
+    const cardsStored = JSON.parse(localStorage.getItem('cards'));
+    return cardsStored === null ? [] : cardsStored;
 }
 
-//Add card to local stroage
+//Add card to local storage
 function setCardsData(cards) {
     localStorage.setItem('cards', JSON.stringify(cards));
     window.location.reload();
 }
 
-createCards();
+//Show correct card count and total cards
+function updateCurrentCards() {
+    if(!JSON.parse(localStorage.getItem("cards"))) {
+        currentCard.innerText = `0/0`;
+    } else {
+        currentCard.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
+}}
 
+//Don't show "No Cards" message if cards exist in local storage
+(function noCardsMessage() {
+    if(JSON.parse(localStorage.getItem("cards"))) {
+        noCardsMsg.style.opacity = 0;
+        cardsWrapper.style.boxShadow = "none";
+    }
+})()
+
+// ============================================ //
 
 //EVENT LISTENERS
 
 //Next Button
 btnNextCard.addEventListener("click", () => {
-    // cardsEl[currentActiveCard].className = 
-    console.log(currentActiveCard)
-    console.log(cardsEl)
 
     cardsEl[currentActiveCard].className = 'card';
     currentActiveCard = currentActiveCard + 1;
@@ -109,8 +121,6 @@ btnNextCard.addEventListener("click", () => {
 
 //Previous Button
 btnPrevCard.addEventListener("click", () => {
-    // cardsEl[currentActiveCard].className = 
-    console.log(currentActiveCard)
     cardsEl[currentActiveCard].className = 'card';
 
     currentActiveCard = currentActiveCard - 1;
@@ -124,7 +134,7 @@ btnPrevCard.addEventListener("click", () => {
     updateCurrentCards();
 });
 
-//Show add container
+//Open new card modal
 btnAddCard.addEventListener("click", () => {
     addCardModal.classList.remove("hidden");
     cardsWrapper.style.display = "none";
@@ -135,21 +145,18 @@ addCardModal.addEventListener("click", (e) => {
     if(e.target.className === "add-card-modal") {
         addCardModal.classList.add("hidden");
         cardsWrapper.style.display = "block"
-
     }
 })
 
 btnCloseForm.addEventListener("click", () => {
     addCardModal.classList.add("hidden");
     cardsWrapper.style.display = "block"
-
 })
 
-btnFormSubmit.addEventListener("click", (e) => {
+btnSubmitForm.addEventListener("click", (e) => {
     e.preventDefault();
     const question = formQuestion.value;
     const answer = formAnswer.value;
-    console.log(question, answer)
 
     if(question.trim() && answer.trim()) {
         const newCard = {question, answer};
@@ -164,36 +171,13 @@ btnFormSubmit.addEventListener("click", (e) => {
         cardsData.push(newCard);
         setCardsData(cardsData);
     }
-
-
-
-    // cardsData.push(newCard);
-    // console.log(cardsData);
-    // addCardModal.classList.add("hidden");
-    // updateCurrentCards();
 })
 
-
 updateCurrentCards();
-
-function updateCurrentCards() {
-    currentCard.innerText = `${currentActiveCard + 1}/${cardsEl.length}`;
-}
 
 
 btnClear.addEventListener("click", () => {
     localStorage.clear();
     cardsWrapper.innerHTMl = '';
     window.location.reload();
-})
-
-
-
-
-// const btnFlip = document.querySelectorAll(".btn-flip");
-// btnFlip.forEach(btn => {
-//     btn.addEventListener("click", (e) => {
-//         const currCard = e.target.parentElement;
-//         currCard.classList.toggle("rotate")
-//     })
-// });
+});

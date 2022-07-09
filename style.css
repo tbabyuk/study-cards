@@ -6,23 +6,95 @@
 }
 
 body {
-    background-color: #ddd;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #2d2d2d;
 }
 
-body h2 {
-    margin-bottom: 15px;
+/* ======================================== */
+
+/* HEADER */
+
+#header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    padding: 15px;
 }
+
+#btn-clear {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+}
+
+#btn-add-card {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+}
+
+/* ======================================== */
+
+/* FOOTER */
+
+#footer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    padding: 15px;
+}
+
+#btn-next-card {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 27%;
+    transform: translate(0, -50%);
+}
+
+#btn-prev-card {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 27%;
+    transform: translate(0, -50%);
+}
+
+/* ======================================== */
+
+/* CARD WRAPPER */
 
 #cards-wrapper {
     position: relative;
     width: 400px;
     height: 250px;
+    box-shadow: 0px 0px 10px 5px rgb(202, 196, 196);
+    color: #aaa;
+    text-align: center;
+    margin: 15px 0;
 }
+
+#no-cards-message {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+}
+
+/* ======================================== */
+
+/* CARD */
 
 .card {
     position: absolute;
@@ -35,11 +107,12 @@ body h2 {
 
 .card-inner {
     position: relative;
-    background-color: blue;
+    box-shadow: 0px 0px 10px 5px rgb(202, 196, 196);
     height: 100%;
     width: 100%;
     transition: transform 0.8s;
     transform-style: preserve-3d;
+    color:#2d2d2d;
 }
 
 .card-front, .card-back {
@@ -52,11 +125,11 @@ body h2 {
 }
 
 .card-back {
-    transform: rotateY(180deg);
+    transform: rotateX(180deg);
 }
 
 .card.flip .card-inner{
-    transform: rotateY(180deg);
+    transform: rotateX(180deg);
 }
 
 .card.active {
@@ -67,19 +140,15 @@ body h2 {
     position: absolute;
     top: 10px;
     right: 10px;
-    color: #ddd;
     cursor: pointer;
 }
 
+/* ======================================== */
 
-/* ADD A NEW CARD */
-
-#btn-add-card {
-    cursor: pointer;
-}
+/* ADD CARD MODAL */
 
 .add-card-modal {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(136, 140, 144, 0.5);
     position: absolute;
     height: 100%;
     width: 100%;
@@ -91,8 +160,8 @@ body h2 {
 
 #add-card-form {
     background-color: white;
-    width: 400px;
-    height: 250px;
+    width: 450px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -115,6 +184,14 @@ body h2 {
     flex-direction: column;
 }
 
+.form-group input {
+    height: 30px;
+    border-radius: 5px;
+    border:2px solid #aaa;
+    padding-left: 8px;
+    margin-top: 5px;
+}
+
 #btn-close-form {
     position: absolute;
     top: 10px;
@@ -126,6 +203,19 @@ body h2 {
 
 .hidden {
     display: none;
+}
+
+/* ======================================== */
+
+/* GLOBAL STYLES */
+
+.btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+    border: none;
+    box-shadow: 0 1px 2px 1px rgb(115, 115, 115);
 }
 
 
